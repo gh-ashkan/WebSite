@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Topbar from "./../../Components/Topbar/Topbar";
 import Navbar from "./../../Components/Navbar/Navbar";
 import Footer from "./../../Components/Footer/Footer";
@@ -12,6 +12,10 @@ import "./CourseInfo.css";
 
 export default function CourseInfo() {
 
+  const [comments, setComments] = useState([])
+  const [sessions, setSessions] = useState([])
+  const [courseDetails, setCourseDetails] = useState({})
+
   const { courseName } = useParams()
 
   useEffect(() => {
@@ -22,7 +26,9 @@ export default function CourseInfo() {
       }
     }).then(res => res.json())
     .then(courseInfo => {
-      console.log(courseInfo);
+      setComments(courseInfo.comments)
+      setSessions(courseInfo.sessions)
+      setCourseDetails(courseInfo)
     })
   }, [])
 
@@ -55,15 +61,10 @@ export default function CourseInfo() {
                 آموزش برنامه نویسی فرانت اند
               </a>
               <h1 className="course-info__title">
-                آموزش 20 کتابخانه جاوااسکریپت برای بازار کار
+                {courseDetails.name}
               </h1>
               <p className="course-info__text">
-                امروزه کتابخانه‌ها کد نویسی را خیلی آسان و لذت بخش تر کرده اند.
-                به قدری که حتی امروزه هیچ شرکت برنامه نویسی پروژه های خود را با
-                Vanilla Js پیاده سازی نمی کند و همیشه از کتابخانه ها و فریمورک
-                های موجود استفاده می کند. پس شما هم اگه میخواید یک برنامه نویس
-                عالی فرانت اند باشید، باید کتابخانه های کاربردی که در بازار کار
-                استفاده می شوند را به خوبی بلد باشید
+                {courseDetails.description}
               </p>
               <div className="course-info__social-media">
                 <a href="#" className="course-info__social-media-item">
