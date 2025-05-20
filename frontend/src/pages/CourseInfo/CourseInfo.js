@@ -30,7 +30,7 @@ export default function CourseInfo() {
     })
       .then((res) => res.json())
       .then((courseInfo) => {
-        setComments(courseInfo.comments);
+        // setComments(courseInfo.comments);
         setSessions(courseInfo.sessions);
         setCourseDetails(courseInfo);
         setCreatedAt(courseInfo.createdAt);
@@ -287,7 +287,7 @@ export default function CourseInfo() {
 
                 {/* Finish Teacher Details */}
 
-                <CommentsTextArea />
+                <CommentsTextArea comments={comments} />
               </div>
             </div>
 
